@@ -7,6 +7,17 @@ const validUsers = [
 ];
 
 export default function handler(req, res) {
+  // Configurar headers CORS
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  // Manejar preflight request (OPTIONS)
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
+  // Manejar POST normal
   if (req.method === "POST") {
     const { email, password } = req.body;
 
@@ -15,11 +26,11 @@ export default function handler(req, res) {
     );
 
     if (userFound) {
-      res.status(200).json({ success: true, message: "Login exitoso" });
+      return res.status(200).json({ success: true, message: "Login exitoso" });
     } else {
-      res.status(401).json({ success: false, message: "Credenciales inválidas" });
+      return res.status(401).json({ success: false, message: "Credenciales inválidas" });
     }
   } else {
-    res.status(405).json({ message: "Método no permitido" });
+    return res.status(405).json({ message: "Método no permitido" });
   }
 }
