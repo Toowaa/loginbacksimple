@@ -8,7 +8,7 @@ const validUsers = [
 
 export default function handler(req, res) {
   // Configurar headers CORS
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000","https://testciber-phi.vercel.app/");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
